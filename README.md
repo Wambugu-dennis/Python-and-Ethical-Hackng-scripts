@@ -1,4 +1,4 @@
-# Python-and-Ethical-Hackng-scripts
+# Python-and-Ethical-Hacking-scripts
 python automation scripts for E-H
 
 This python program automates changing device mac address on whichever port available
