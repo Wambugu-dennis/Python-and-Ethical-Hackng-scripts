@@ -2,7 +2,6 @@
 # 25-08-2022
 
 
-# important imports
 import subprocess
 import optparse
 import re
