@@ -11,4 +11,4 @@ def scan(ip):
     scapy.layers.l2.arping(ip)
 
 
-scan("192.168.100.1/24")
+scan("192.168.1.1/24")
