@@ -15,4 +15,4 @@ def scan(ip):
     arp_request_broadcast.show()
 
 
-scan("192.168.100.1/24")
+scan("192.168.1.1/24")
