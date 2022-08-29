@@ -9,7 +9,7 @@ import argparse
 
 def get_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-I", "--iprange", dest="ip", help="ip address range to scan")
+    parser.add_argument("-I", "--iprange", dest="ip", help="target ip address / ip address range to scan")
     options = parser.parse_args()
     if not options.ip:
         parser.error("[-] Please specify an ip address range, use --help for more info.")
