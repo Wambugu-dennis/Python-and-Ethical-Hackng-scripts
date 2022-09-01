@@ -11,7 +11,9 @@ def sniff(interface):
 
 
 def sniffed_packet(packet):
-    print(packet)
+    if packet.haslayer(http.HTTPRequest):
+        if packet.haslayer(scapy.Raw):
+            print(packet.show())
 
 
 sniff("wlo1")
