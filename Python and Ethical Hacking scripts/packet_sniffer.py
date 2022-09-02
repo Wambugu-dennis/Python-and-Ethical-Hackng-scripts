@@ -15,10 +15,10 @@ def sniffed_packet(packet):
         if packet.haslayer(scapy.Raw):
             load = packet[scapy.Raw].load
             words = ["username", "user", "uname", "login", "password", "pass"]
-            for k_word in words:
-                if b'k_word' in load: continue
-                print(load)
-                break
+            for word in words:
+                if b'word' in load:   # converting result from byte to string for output
+                    print(load)
+                    break
 
 
 sniff("wlo1")
