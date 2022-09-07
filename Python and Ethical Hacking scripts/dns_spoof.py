@@ -5,7 +5,6 @@ import scapy.all as scapy
 
 def process_packet(packet):
     my_packet = scapy.IP(packet.get_payload())
-    print(my_packet.show())
     if my_packet.haslayer(scapy.DNSRR):
         qname = my_packet[scapy.DNSQR].qname
         if "www.bing.com" in qname:
