@@ -7,16 +7,16 @@ import scapy.all as scapy
 # created by Wambugu
 # 30-08-2022
 
-def get_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-t", "--target-ip", dest=target_ip, help="target / victims ip address of victim")
-    parser.add_argument("-g", "--gateway-ip", dest=gateway_ip, help="gateway / routers ip address")
-    (options, arguments) = parser.parse_args()
-    if not options.target_ip:
-        parser.error("[-] Please specify the a target ip address, use --help for more info.")
-    elif not options.gateway_ip:
-        parser.error("[-] Please specify the a gateway ip address, use --help for more info.")
-    return options
+# def get_arguments():
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("-t", "--target-ip", dest=target_ip, help="target / victims ip address of victim")
+#     parser.add_argument("-g", "--gateway-ip", dest=gateway_ip, help="gateway / routers ip address")
+#     (options, arguments) = parser.parse_args()
+#     if not options.target_ip:
+#         parser.error("[-] Please specify the a target ip address, use --help for more info.")
+#     elif not options.gateway_ip:
+#         parser.error("[-] Please specify the a gateway ip address, use --help for more info.")
+#     return options
 
 
 def get_mac(ip):
@@ -42,8 +42,8 @@ def restore(destination_ip, source_ip):
     scapy.send(packet, count=4, verbose=False)
 
 
-target_ip = get_arguments(options.target_ip)
-gateway_ip = get_arguments(options.gateway_ip)
+target_ip = "192.168.100.158"  # get_arguments(options.target_ip)
+gateway_ip = "192.168.100.1"  # get_arguments(options.gateway_ip)
 
 try:
     sent_packets_count = 0

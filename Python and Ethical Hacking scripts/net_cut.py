@@ -1,10 +1,10 @@
 #!/usrbin/evn python
-
 import netfilterqueue
 
 
 def process_packet(packet):
     print(packet)
+    packet.drop()
 
 
 queue = netfilterqueue.NetfilterQueue()
