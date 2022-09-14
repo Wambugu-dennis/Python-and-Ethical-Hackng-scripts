@@ -20,7 +20,7 @@ def process_packet(packet):
             ack_list.append(my_packet[scapy.tcp].ack)
             if ".exe" in my_packet[scapy.Raw].load:
                 print("[+] .exe Request file requested")
-                print(my_packet.show())
+
         elif my_packet[scapy.TCP].sport == 80:
             if my_packet[scapy.TCP].seq in ack_list:
                 ack_list.remove(my_packet[scapy.TCP].seq)
