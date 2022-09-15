@@ -33,8 +33,9 @@ def process_packet(packet):
             packet.setpayload(str(new_packet))
 
     packet.accept()
+    send(my_packet)
 
 
-queue = netfilterqueue.NetfiletrQueue()
-queue.bind(0, process_packet)
-queue.run()
+# queue = netfilterqueue.NetfiletrQueue()
+# queue.bind(0, process_packet)
+# queue.run()
