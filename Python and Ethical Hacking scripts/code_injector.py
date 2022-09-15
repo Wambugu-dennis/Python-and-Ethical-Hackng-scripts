@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import netfilterqueue
 import scapy.all as scapy
+import re
 
 ack_list = []
 
@@ -18,6 +19,7 @@ def process_packet(packet):
     if my_packet.haslayer(scapy.Raw):
         if my_packet[scapy.TCP].dport == 80:
             print("[+] Request...")
+            re.sub("Accept-Encoding:.*?\\r\\n", "", my_packet[scapy.Raw].load)
             print(my_packet.show())
         elif my_packet[scapy.TCP].sport == 80:
             print("[+] Response...")
