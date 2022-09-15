@@ -33,7 +33,7 @@ def process_packet(packet):
                     content_length = content_length_search.group(1)
                     new_content_length = int(content_length) + len(injection_code)
                     load = load.replace(content_length, str(new_content_length))
-                    print(new_content_length)
+                    # print(new_content_length)
 
             if load != http_packet[scapy.Raw].load:
                 new_packet = set_load(http_packet, load)
