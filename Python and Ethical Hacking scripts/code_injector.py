@@ -19,7 +19,9 @@ def process_packet(packet):
     if my_packet.haslayer(scapy.Raw):
         if my_packet[scapy.TCP].dport == 80:
             print("[+] Request...")
-            re.sub("Accept-Encoding:.*?\\r\\n", "", my_packet[scapy.Raw].load)
+            modified_load = re.sub("Accept-Encoding:.*?\\r\\n", "", my_packet[scapy.Raw].load)
+            new_packet = set_load(my_packet, modified_load)
+            packet.setpayload(str(new_packet))
             print(my_packet.show())
         elif my_packet[scapy.TCP].sport == 80:
             print("[+] Response...")
