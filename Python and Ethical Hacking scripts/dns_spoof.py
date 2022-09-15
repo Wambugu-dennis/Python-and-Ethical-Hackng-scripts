@@ -18,7 +18,7 @@ def process_packet(packet):
             del my_packet[scapy.UDP].chksm
             del my_packet[scapy.UDP].len
 
-            packet.set_payload(bytes(my_packet))  # set_payload expects bytes
+            packet.set_payload(bytes(my_packet))  # expected output is bytes
 
     packet.accept()
 
