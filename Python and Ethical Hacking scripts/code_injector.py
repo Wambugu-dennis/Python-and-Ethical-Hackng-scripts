@@ -30,9 +30,9 @@ def process_packet(packet):
                 content_length_search = re.search("(?:Content-Length:\\s)(\\d*)", load)
 
                 if content_length_search and "text/html" in load:
-                    content_length = content_length_search.group(1).encode()
-                    new_content_length = content_length + len(injection_code).decode()
-                    load = load.replace(content_length, new_content_length).decode()
+                    content_length = content_length_search.group(1)
+                    new_content_length = int(content_length) + len(injection_code)
+                    load = load.replace(content_length, str(new_content_length))
                     print(new_content_length)
 
             if load != http_packet[scapy.Raw].load:
