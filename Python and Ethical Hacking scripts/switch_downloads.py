@@ -18,7 +18,7 @@ def process_packet(packet):
     if http_packet.haslayer(scapy.Raw):
         if http_packet[scapy.TCP].dport == 8080:
             ack_list.append(http_packet[scapy.tcp].ack)
-            if ".exe" in http_packet[scapy.Raw].load.decode():
+            if b".exe" in http_packet[scapy.Raw].load and b"192.168.x.y" not in http_packet[scapy.Raw].load:
                 print("[+] .exe Request file requested")
 
         elif http_packet[scapy.TCP].sport == 8080:
