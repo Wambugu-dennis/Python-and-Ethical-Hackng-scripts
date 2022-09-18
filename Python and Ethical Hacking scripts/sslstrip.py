@@ -1,1 +1,0 @@
-#  use this program and all other programs in this repository for learning purposes only!
