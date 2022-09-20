@@ -6,7 +6,7 @@ import scapy.all as scapy
 
 # created by Wambugu
 # 30-08-2022
-
+# uncomment the below section to use the options and arguments in the program directly as opposed to hardcoded inputs
 # def get_arguments():
 #     parser = argparse.ArgumentParser()
 #     parser.add_argument("-t", "--target-ip", dest=target_ip, help="target / victims ip address of victim")
