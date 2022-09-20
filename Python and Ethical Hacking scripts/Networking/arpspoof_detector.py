@@ -28,4 +28,4 @@ def sniffed_packet(packet):
             pass
 
 
-sniff("wlo1")
+sniff("[enter your interface here!!]")
