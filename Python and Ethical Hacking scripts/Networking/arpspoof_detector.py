@@ -1,4 +1,13 @@
 #!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+
+##############################################################################
+#                                                                            #
+#                           By Wambugu   Dennis                              #
+#                                                                            #
+##############################################################################
+
+# Disclaimer: Do Not Use this program for illegal purposes ;)
 import scapy.all as scapy
 
 

