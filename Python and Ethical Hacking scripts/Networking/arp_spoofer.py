@@ -3,11 +3,14 @@
 
 ##############################################################################
 #                                                                            #
-#                           By Wambugu   Dennis                              #
+#                                 py & EH                                    #
 #                                                                            #
 ##############################################################################
 
 # Disclaimer: Do Not Use this program for illegal purposes ;)
+import netfilterqueue
+import scapy.all as scapy
+import re
 import time
 import argparse
 import scapy.all as scapy
