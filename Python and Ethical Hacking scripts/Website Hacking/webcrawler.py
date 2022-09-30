@@ -12,7 +12,7 @@ def request(url):
 
 target_url = "google.com"
 subdomains_list = ""
-with open("/home/bitsec/Downloads/subdomains-wordlist.txt", "r") as wordlist_file:
+with open("/your*/directory*/path*/subdomains-wordlist.txt", "r") as wordlist_file:
     print("[+] ----- Valid subdomain(s) -----   ")
     for line in wordlist_file:
         word = line.strip()
