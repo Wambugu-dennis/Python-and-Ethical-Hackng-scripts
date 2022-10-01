@@ -10,12 +10,12 @@ def request(url):
         pass
 
 
-target_url = "google.com"
+target_url = "vulnerableweb.com"
 subdomains_list = ""
 directories_list = ""
 final_url = ""
-with open("/home/bitsec/Downloads/subdomains-wordlist.txt", "r") as sub_file:
-    with open("/home/bitsec/Downloads/subdomains-wordlist.txt", "r") as dir_file:
+with open("/directory*/path*/subdomains-wordlist.txt", "r") as sub_file:
+    with open("/directory*/path*/subdomains-wordlist.txt", "r") as dir_file:
 
         print("[+] ----- Discovered Valid subdomain(s) and directories -----   ")
         for sub_line in sub_file:
