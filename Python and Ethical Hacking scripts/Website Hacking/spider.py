@@ -5,7 +5,7 @@ import re
 import urllib.parse as urlparse
 
 
-target_url = "https://cybershujaa.co.ke/"  # supply your own domain here
+target_url = "https://yourwebiste.com/"  # supply your own domain here
 target_links = []
 def extract_links(url):
     response = requests.get(target_url)
